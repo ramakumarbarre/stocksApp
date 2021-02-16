@@ -1,0 +1,88 @@
+
+<div *ngIf="!addClicked" ><h2>Stock List</h2>
+
+<table class="table">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">Company Name</th>
+        <th scope="col">Open</th>
+        <th scope="col">High</th>
+        <th scope="col">Low</th>
+        <th scope="col">Close</th>
+        <th scope="col">Volume</th>
+        <th scope="col">Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+
+      <tr *ngFor="let stock of stocks">
+        <td><a  routerLink="/stocks/{{stock.id}}">{{stock.company}}</a> </td>
+          <td>{{stock.open}}</td>
+          <td>{{stock.high}} </td>
+          <td>{{stock.low}} </td>
+          <td>{{stock.close}}</td>
+          <td>{{stock.volume}} </td>
+          <button type="button" class="btn btn-danger"
+          mwlConfirmationPopover
+          [popoverTitle]="popoverTitle"
+          [popoverMessage]="popoverMessage"
+          placement="left"
+          (confirm)="delete(stock)"
+          (cancel)="cancelClicked = true"
+           >Delete</button>
+      </tr>
+    </tbody>
+  </table>
+  <!-- (click)="delete(stock)" -->
+  <button type="button" class="btn btn-primary" (click)="add()">Add Stock Company</button>
+</div>
+  <div *ngIf="addClicked">
+    <h2>Add Stock Company OHLCV</h2>
+    <form [formGroup]="stockForm">
+      <div class="form-group col-md-6">
+          <label for="company">Company Name</label>
+          <input type="text" formControlName="company" name="stockCompanyClass.company" [(ngModel)]="stockCompanyClass.company" class="form-control" [ngClass]="{ 'is-invalid': submitted && f?.company?.errors }" />
+          <div *ngIf="submitted && f?.company?.errors" class="invalid-feedback">
+              <div *ngIf="f?.company?.errors?.required">company is required</div>
+          </div>
+      </div>
+      <div class="form-group col-md-6">
+        <label for="open">Open</label>
+        <input type="text" formControlName="open" name="stockCompanyClass.open" [(ngModel)]="stockCompanyClass.open" class="form-control" [ngClass]="{ 'is-invalid': submitted && f?.open?.errors }" />
+        <div *ngIf="submitted && f?.open?.errors" class="invalid-feedback">
+            <div *ngIf="f?.open?.errors?.required">open is required</div>
+        </div>
+      </div>
+    <div class="form-group col-md-6">
+      <label for="high">High</label>
+      <input type="text" formControlName="high" name="stockCompanyClass.high" [(ngModel)]="stockCompanyClass.high" class="form-control" [ngClass]="{ 'is-invalid': submitted && f?.high?.errors }" />
+      <div *ngIf="submitted && f?.high?.errors" class="invalid-feedback">
+          <div *ngIf="f?.high?.errors?.required">high is required</div>
+      </div>
+    </div>
+    <div class="form-group col-md-6">
+      <label for="low">Low</label>
+      <input type="text" formControlName="low" name="stockCompanyClass.low" [(ngModel)]="stockCompanyClass.low" class="form-control" [ngClass]="{ 'is-invalid': submitted && f?.low?.errors }" />
+      <div *ngIf="submitted && f?.low?.errors" class="invalid-feedback">
+          <div *ngIf="f?.low?.errors?.required">low is required</div>
+      </div>
+    </div>
+    <div class="form-group col-md-6">
+      <label for="close">Close</label>
+      <input type="text" formControlName="close" name="stockCompanyClass.close" [(ngModel)]="stockCompanyClass.close" class="form-control" [ngClass]="{ 'is-invalid': submitted && f?.close?.errors }" />
+      <div *ngIf="submitted && f?.close?.errors" class="invalid-feedback">
+          <div *ngIf="f?.close?.errors?.required">close is required</div>
+      </div>
+    </div>
+    <div class="form-group col-md-6">
+      <label for="volume">Volume</label>
+      <input type="text" formControlName="volume" name="stockCompanyClass.volume" [(ngModel)]="stockCompanyClass.volume" class="form-control" [ngClass]="{ 'is-invalid': submitted && f?.volume?.errors }" />
+      <div *ngIf="submitted && f?.volume?.errors" class="invalid-feedback">
+          <div *ngIf="f?.volume?.errors?.required">volume is required</div>
+      </div>
+    </div>
+      <div class="form-group">
+        <button type="submit" class="btn btn-primary" (click)="onSubmit()">Save</button>
+      </div>
+    </form>
+</div>

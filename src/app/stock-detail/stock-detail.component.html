@@ -1,0 +1,28 @@
+
+<h2>Company Name: <b>{{company}}</b></h2>
+
+<table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col">Date</th>
+        <th scope="col">Open</th>
+        <th scope="col">High</th>
+        <th scope="col">Low</th>
+        <th scope="col">Close</th>
+        <th scope="col">Volume</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let stockDetail of stockDetails">
+        <td>{{stockDetail.date}} </td>
+          <td>{{stockDetail.open}}</td>
+          <td>{{stockDetail.high}} </td>
+          <td>{{stockDetail.low}} </td>
+          <td>{{stockDetail.close}}</td>
+          <td>{{stockDetail.volume}} </td>
+
+      </tr>
+    </tbody>
+  </table>
+
+  <button type="button" class="btn btn-primary" (click)="goBack()">Back</button>
